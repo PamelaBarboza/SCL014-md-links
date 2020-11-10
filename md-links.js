@@ -1,23 +1,21 @@
 const fs = require("fs");
+const mk = require('./regularExpression');
 
 
- const readDir = (file) => {
-   fs.readFile(file,"utf-8", (err, data) => {
-     if (err) {
-       console.log(err);
-     }else {
-       const lines = data.split(/\r?\n/);
-       lines.forEach((line) => {
-         console.log("texto", line);
-       });
-     }
-   console.log(data);
+//leer archivo
+const readDir = (file) => {
+  fs.readFile(file, "utf-8", (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      mk(data);
+    }
+  });
+};
+module.exports = readDir;
 
-   });
- };
- module.exports = readDir;
-
-/*  const http = requiere(http´);
+/* validar links
+ const http = requiere(´http´);
  const url = process.argv[2];
 
  http.get(
