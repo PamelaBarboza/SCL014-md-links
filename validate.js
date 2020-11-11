@@ -1,10 +1,11 @@
+const fetch = require("node-fetch");
+
 module.exports = (validateLinks) => {
-console.log(validateLinks);
-}
-
-
-http.get(url, function callback(respuesta) {
-  respuesta.on("data", (param) => {
-    console.log(param.toString());
+  validateLinks.forEach((element) => {
+    fetch(element.links).then((res) => {
+      console.log(res.url);
+      console.log(res.statusText);
+      console.log(res.status);
+    });
   });
-}); 
+};
