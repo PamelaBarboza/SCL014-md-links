@@ -1,19 +1,22 @@
-module.exports = (markdownString) => {
+const validateLinks = require("./validate");
+module.exports = (markdownString, file) => {
   const markString = markdownString.split("\n");
 
   const regexMdLinks = /\[([^\[]+)\](\(.*\))/gm;
   const singleMatch = /\[([^\[]+)\]\((.*)\)/;
+  const linkArray = [];
 
   markString.forEach((element) => {
     const links = element.match(regexMdLinks);
 
     if (links !== null) {
       for (let i = 0; i < links.length; i++) {
-        let text = singleMatch.exec(links[i]);
-
-        console.log(`Word  #${i}: ${text[1]}`);
-        console.log(`Link  #${i}: ${text[2]}`);
+        const text = singleMatch.exec(links[i]);
+        if (text[2].includes("https://")) {
+          linkArray.push({ links: text[2], texto: text[1], file: file });
+        }
       }
     }
   });
+  validateLinks(linkArray);
 };
