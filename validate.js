@@ -1,7 +1,11 @@
 const fetch = require("node-fetch");
-const stats = require('./stats');
+const validateOk = require("./stats");
+const chalk = require("chalk");
+const log = console.log;
 
 module.exports = (validateLinks) => {
+  const arrayLinksContent = [];
+
   const validateFetch = validateLinks.map((element) => {
     return fetch(element.links).then((res) => {
       return {
@@ -13,9 +17,35 @@ module.exports = (validateLinks) => {
       };
     });
   });
+  //espera que todas las promesas sean terminadas para poder juntarlas en una y poder continuar
+  Promise.all(validateFetch)
+    .then((respArray) => {
+      let validateOption = "";
+      if (process.argv.length > 3) {
+        validateOption = process.argv[3];
+      }
+      respArray.map((link) => {
+        if (validateOption === "--validate") {
+          log(
+            chalk.green(
+              link.file +
+                " " +
+                chalk.blue(link.href) +
+                " " +
+                chalk.yellow(link.status) +
+                " " +
+                chalk.white(link.texto) +
+                " " +
+                chalk.magenta(link.statusText)
+            )
+          );
+        }
 
-  Promise.all(validateFetch).then((respArray) => {
-      stats(respArray);
-
-  });
+        return arrayLinksContent.push(link);
+      });
+      validateOk(arrayLinksContent);
+    })
+    .catch((reason) => {
+      console.log(reason);
+    });
 };
