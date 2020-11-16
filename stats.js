@@ -1,5 +1,5 @@
+//estadísticas de los links stats
 const chalk = require("chalk");
-
 const log = console.log;
 
 module.exports = (validateOk) => {
@@ -13,7 +13,7 @@ module.exports = (validateOk) => {
       validateStats = process.argv[3];
     }
 
-      if (validateStats === "--stats") {
+      if (validateStats === "--stats" || validateStats === "-s") {
         log(chalk.yellow("MODULE --STATS"));
         log(chalk.whiteBright("Total: " + totalSumOfLinks.length));
         log(chalk.magentaBright("Unique: " + uniqueLinks.length));

@@ -1,38 +1,50 @@
-const fs = require("fs");//requiriendo el modulo fs
-const mk = require("./regularExpression");//requiriendo una funcion que se llama mk
+const fs = require("fs");
 const path = require("path");
+const mk = require("./regularExpression");
 
-const readDirectory = (__dirname => {
-  return new Promise((resolve, reject) => {
-    fs.readdir(__dirname, (err, subdirs) => {
-      if (err) {
-        reject(console.log(err, "El directorio esta vacio"))
-      }
-      resolve(subdirs);
-      /* console.log(subdirs) */
-      subdirs.forEach(file => {
-        if (path.extname(file) === ".md") {
-         /* console.log(file) */
-        }
-      })
-    })
-  })
-});
+// valida la ruta del archivo
+const validatePath = (pathFile) => {
+  // arregla el formato de la ruta link documentacion: https://nodejs.org/api/path.html#path_path_resolve_paths
+  let pathResolve = path.resolve(pathFile);
+  console.log("resolve ruta", pathResolve);
 
-readDirectory(__dirname);
-module.exports = readDirectory;
+  // normaliza la ruta (ej.: //-> /) link documentación: https://nodejs.org/api/path.html#path_path_normalize_path
+  let pathNormalize = path.normalize(pathResolve);
+  console.log("normalize ruta", pathNormalize);
 
-//leer archivo del directorio, recibe 3 parametros
-const readDir = (file) => {
-  fs.readFile(file, "utf-8", (err, data) => {
+  // ya resuelto y normalizado. Necesito saber si es un archivo o directorio.
+  // valida si la ruta existe.
+  fs.readFile(pathNormalize, "utf-8", (err, data) => {
     if (err) {
-      /* console.log(err); */
+      console.log("¡Esa no es una ruta valida!");
     } else {
-      mk(data, file);
+      isMarkdown(data, pathNormalize);
+      console.log("data", data);
+
+      console.log("readFile success", pathNormalize);
     }
   });
 };
-module.exports = readDir;
+
+// verificar cual es la extensión
+const isMarkdown = (file, pathFile) => {
+  console.log(path.extname(pathFile));
+  if (path.extname(pathFile) === ".md") {
+    console.log("readFile");
+    mk(file, pathFile);
+  } else {
+    console.log(
+      "Extensión invalida. Ingrese una ruta de un archivo de extensión markdown"
+    );
+  }
+};
+module.exports = validatePath;
+
+// Parametro es la idea que esperas recibir. (incognita).
+// Argumento es cuando uno llama la función y le pasa el valor que se espera.
+// ctrl k -U -> ctrl k- c no es necesario selecionar la linea
+
+
 
 
 
