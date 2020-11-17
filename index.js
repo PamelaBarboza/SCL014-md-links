@@ -1,6 +1,6 @@
 const validatePath = require("./md-links");
 const chalk = require("chalk");
-const validate = require("./validate");
+/* const validate = require("./validate"); */
 
 // variables personalizadas
 const pathFile = process.argv[2];

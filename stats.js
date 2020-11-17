@@ -9,11 +9,11 @@ module.exports = (validateOk) => {
 
   Promise.all(validateOk).then((resp) => {
     let validateStats = "";
-    if (process.argv.length > 3) {
-      validateStats = process.argv[3];
-    }
+    if (
+      validateStats = process.argv[3]);
+    
 
-      if (validateStats === "--stats" || validateStats === "-s") {
+      if (validateStats === "--stats" || validateStats === "--s") {
         log(chalk.yellow("MODULE --STATS"));
         log(chalk.whiteBright("Total: " + totalSumOfLinks.length));
         log(chalk.magentaBright("Unique: " + uniqueLinks.length));
@@ -21,3 +21,5 @@ module.exports = (validateOk) => {
 
   });
 };
+/* el set es parecido al array solo que permite almacenar elementos
+sin que se repitan, por lo que podemos contar los links únicos. */

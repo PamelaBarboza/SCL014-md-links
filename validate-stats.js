@@ -6,7 +6,7 @@ const log = console.log;
 
 module.exports = (objectLinksValidate) => {
   const arrayObjectLinks = objectLinksValidate;
-  // Stringify object
+  // Stringify object:
   const arrayObjectLinkString = new Set(arrayObjectLinks.map(JSON.stringify));
   // Array Without Duplicate
   const arrayWithoutDuplicate = Array.from(arrayObjectLinkString).map(
@@ -25,7 +25,10 @@ module.exports = (objectLinksValidate) => {
       objectLinksValidatee = process.argv[4];
     }
 
-    if (objectLinksValidate === "-s" && objectLinksValidatee === "-v" || objectLinksValidate === "-v" && objectLinksValidatee === "-s" ){
+    if (
+      (objectLinksValidate === "--s" && objectLinksValidatee === "--v") ||
+      (objectLinksValidate === "--v" && objectLinksValidatee === "--s")
+    ) {
       log(chalk.yellow("MÓDULE --VALIDATE --STATS"));
       log(chalk.blue("Total: " + arrayObjectLinks.length));
       log(chalk.green("Unique: " + arrayWithoutDuplicate.length));
@@ -33,3 +36,6 @@ module.exports = (objectLinksValidate) => {
     }
   });
 };
+
+/*Stringify object: convertimos el objeto arrayObjectLinkString en un objeto json que va a poder ser almacenado y transmitido de modo estandar */
+/* json.parse convertimos un objeto json en un objeto js*/

@@ -29,7 +29,7 @@ module.exports = (validateLinksok) => {
       respArray.map((link) => {
         if (
           validateOption === "--validate" ||
-          validateOption === "-v"
+          validateOption === "--v"
         ) {
           log(
             chalk.green(
