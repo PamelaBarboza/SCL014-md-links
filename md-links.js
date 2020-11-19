@@ -7,10 +7,8 @@ const validatePath = (pathFile) => {
   // arregla el formato de la ruta link documentacion: https://nodejs.org/api/path.html#path_path_resolve_paths
   let pathResolve = path.resolve(pathFile);
 
-
   // normaliza la ruta (ej.: //-> /) link documentación: https://nodejs.org/api/path.html#path_path_normalize_path
   let pathNormalize = path.normalize(pathResolve);
-
 
   // ya resuelto y normalizado. Necesito saber si es un archivo o directorio.
   // valida si la ruta existe.
@@ -19,7 +17,6 @@ const validatePath = (pathFile) => {
       console.log("¡Esa no es una ruta valida!");
     } else {
       isMarkdown(data, pathNormalize);
-
     }
   });
 };
@@ -36,11 +33,3 @@ const isMarkdown = (file, pathFile) => {
   }
 };
 module.exports = validatePath;
-
-
-
-
-
-
-
-

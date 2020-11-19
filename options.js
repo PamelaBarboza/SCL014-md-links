@@ -1,6 +1,5 @@
-const validateLinks = require("./validate");
-const validateOk = require("./stats");
-
+const moduleValidate = require("./validate");
+const moduleStats = require("./stats");
 
 module.exports = (linkArray) => {
   //VALIDATE-STATS
@@ -24,15 +23,14 @@ module.exports = (linkArray) => {
   }
 
   if (options.validate === true && options.stats === true) {
-    validateLinks(linkArray, options.stats);
-    //aqui funcion V-S
+    //aqui va la funcion de Validate y stats
+    moduleValidate(linkArray, options.stats);
   } else if (options.validate === true) {
-    validateLinks(linkArray, options.stats);
-    //aqui funcion V
+    //aqui va la funcion Validate
+    moduleValidate(linkArray, options.stats);
   } else if (options.stats === true) {
-    validateOk(linkArray);
-
-    //aqui funcion S
+    //aqui funcion Stats
+    moduleStats(linkArray);
   } else {
     console.log(linkArray);
   }

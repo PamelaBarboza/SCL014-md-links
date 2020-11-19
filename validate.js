@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const statsModule = require("./validate-stats");
+const moduleStatsValidate = require("./validate-stats");
 const chalk = require("chalk");
 const log = console.log;
 
@@ -22,7 +22,7 @@ module.exports = (validateLinksok, stats) => {
   Promise.all(validateFetch)
     .then((respArray) => {
       if (stats === true) {
-        statsModule(respArray);
+        moduleStatsValidate(respArray);
       } else {
         respArray.map((link) => {
           log(
