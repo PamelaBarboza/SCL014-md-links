@@ -1,6 +1,6 @@
 {
   "name": "md-links-pamelabarboza",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "dependencies": {
     "chalk": "^4.1.0",
     "jshint": "^2.12.0",
