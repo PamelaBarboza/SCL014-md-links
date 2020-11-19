@@ -1,10 +1,9 @@
 const fetch = require("node-fetch");
-const validateOk = require("./stats");
 const statsModule = require("./validate-stats");
 const chalk = require("chalk");
 const log = console.log;
 
-module.exports = (validateLinksok) => {
+module.exports = (validateLinksok, stats) => {
   const arrayLinksContent = [];
 
   const validateLinks = validateLinksok;
@@ -22,15 +21,10 @@ module.exports = (validateLinksok) => {
   //espera que todas las promesas sean terminadas para poder juntarlas en una y poder continuar
   Promise.all(validateFetch)
     .then((respArray) => {
-      let validateOption = "";
-      if (process.argv.length > 3) {
-        validateOption = process.argv[3];
-      }
-      respArray.map((link) => {
-        if (
-          validateOption === "--validate" ||
-          validateOption === "--v"
-        ) {
+      if (stats === true) {
+        statsModule(respArray);
+      } else {
+        respArray.map((link) => {
           log(
             chalk.green(
               link.file +
@@ -44,12 +38,10 @@ module.exports = (validateLinksok) => {
                 chalk.magenta(link.statusText)
             )
           );
-        }
 
-        return arrayLinksContent.push(link);
-      });
-      validateOk(arrayLinksContent);
-      statsModule(arrayLinksContent);
+          return arrayLinksContent.push(link);
+        });
+      }
     })
     .catch((reason) => {
       console.log(reason);

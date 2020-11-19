@@ -6,11 +6,11 @@ const mk = require("./regularExpression");
 const validatePath = (pathFile) => {
   // arregla el formato de la ruta link documentacion: https://nodejs.org/api/path.html#path_path_resolve_paths
   let pathResolve = path.resolve(pathFile);
-  console.log("resuelve ruta", pathResolve);
+
 
   // normaliza la ruta (ej.: //-> /) link documentación: https://nodejs.org/api/path.html#path_path_normalize_path
   let pathNormalize = path.normalize(pathResolve);
-  console.log("normaliza ruta", pathNormalize);
+
 
   // ya resuelto y normalizado. Necesito saber si es un archivo o directorio.
   // valida si la ruta existe.
@@ -19,9 +19,7 @@ const validatePath = (pathFile) => {
       console.log("¡Esa no es una ruta valida!");
     } else {
       isMarkdown(data, pathNormalize);
-     console.log("data", data);
 
-      console.log("readFile success", pathNormalize);
     }
   });
 };
@@ -30,7 +28,6 @@ const validatePath = (pathFile) => {
 const isMarkdown = (file, pathFile) => {
   console.log(path.extname(pathFile));
   if (path.extname(pathFile) === ".md") {
-    //console.log("readFile");
     mk(file, pathFile);
   } else {
     console.log(
