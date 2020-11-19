@@ -1,12 +1,14 @@
 {
   "name": "md-links-pamelabarboza",
-  "version": "0.3.0",
+  "version": "0.5.1",
   "dependencies": {
     "chalk": "^4.1.0",
     "jshint": "^2.12.0",
     "markdown-it": "^12.0.2",
     "node-fetch": "^2.6.1"
   },
+  "bin":  "index.js",
+
   "description": "",
   "main": "index.js",
   "directories": {

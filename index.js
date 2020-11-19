@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const validatePath = require("./md-links");
 const chalk = require("chalk");
 /* const validate = require("./validate"); */
