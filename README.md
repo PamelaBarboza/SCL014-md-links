@@ -67,7 +67,11 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
 
 ![Stats](./img/cuartoPaso.jpg)
 
-## 5. Objetivos de aprendizaje
+## 5. Planificación - Trello
+
+![Trello](./img/TRELLO.jpg)
+
+## . Objetivos de aprendizaje
 
 ### JavaScript
 
